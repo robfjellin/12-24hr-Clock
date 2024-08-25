@@ -2,15 +2,17 @@
 
 // Global variables to hold users time
 int globalHour;
+int globalMilHour;
 int globalMinute;
 int globalSecond;
 
 // Formats number as 2 digits if it isn't already
 string twoDigitString(unsigned int n) {
-  string twoDigit;
+    string twoDigit;
     if (n >= 0 && n <= 9) {
-      twoDigit = "0" + to_string(n);
-  } else {
+        twoDigit = "0" + to_string(n);
+    }
+    else {
         twoDigit = to_string(n);
     }
     return twoDigit;
@@ -19,7 +21,7 @@ string twoDigitString(unsigned int n) {
 // Format to military time
 string formatTime24(int h, int m, int s) {
     string militaryTime;
-    
+
     militaryTime = twoDigitString(h) + ":" + twoDigitString(m) + ":" + twoDigitString(s);
     return militaryTime;
 }
@@ -28,11 +30,12 @@ string formatTime24(int h, int m, int s) {
 string formatTime12(unsigned int h, unsigned int m, unsigned int s) {
     int hour;
     string amOrPm;
-    
+
     if (h > 11) {
         hour = h - 12;
         amOrPm = " P M";
-    } else {
+    }
+    else {
         hour = h;
         amOrPm = " A M";
     }
@@ -53,30 +56,39 @@ void printTime() {
 
 // Takes initial time from user
 void timeInTake() {
-    int hour;
     cout << "Please enter an hour (0-23)." << endl;
-    cin >> hour;
+    cin >> globalHour;
     cout << "Please enter a minute (0-59)." << endl;
     cin >> globalMinute;
     cout << "Please enter a second (0-59)." << endl;
     cin >> globalSecond;
     cout << "";
-    
+
     printTime();
 }
 
 // Adds one hour to current time
 void addOneHour() {
     globalHour += 1;
+    if (globalHour > 23) {
+        globalHour -= 24;
+    }
+    globalMilHour = globalHour;
 }
 
 // Adds one minute to current time
 void addOneMinute() {
     globalMinute += 1;
+    if (globalMinute > 59) {
+        globalMinute -= 60;
+    }
 }
 
 // Adds one second to current time
 void addOneSecond() {
     globalSecond += 1;
+    if (globalMinute > 59) {
+        globalMinute -= 60;
+    }
 }
 
