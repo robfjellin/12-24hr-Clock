@@ -4,7 +4,7 @@ The program also has the capability to add time and you can choose to increment 
 
 I was really able to showcase my ability to modularize code with this project. I also had a fun time creating the methods to convert the user input time into 12-hour and 24-hour formats.
 
-There is still work to be done, there's a bug that lies when incrementing the time past 12 or 23 hours and 59 minutes or seconds, where instead of resetting back to the first number it just increments to a time that doesn't exist (e.g. 25th hour or 61st minute.)
+~There is still work to be done, there's a bug that lies when incrementing the time past 12 or 23 hours and 59 minutes or seconds, where instead of resetting back to the first number it just increments to a time that doesn't exist (e.g. 25th hour or 61st minute.)~ (Fixed)
 
 I also believe the code can still be refined and written more simply as well as adding comments for more readability.
 
