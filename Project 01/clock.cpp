@@ -23,17 +23,14 @@ void mainMenu() {
         // Processes users input
         switch (userChoice) {
             case 1:
-                cout << "hour" << endl;
                 addOneHour(); // Increment hour
                 printTime(); // Prints updated time
                 break;
             case 2:
-                cout << "minute" << endl;
                 addOneMinute(); // Increment minute
                 printTime();
                 break;
             case 3:
-                cout << "second" << endl;
                 addOneSecond(); // Increment second
                 printTime();
                 break;
