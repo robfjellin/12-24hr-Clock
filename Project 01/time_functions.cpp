@@ -81,14 +81,16 @@ void addOneMinute() {
     globalMinute += 1;
     if (globalMinute > 59) {
         globalMinute -= 60;
+        addOneHour();
     }
 }
 
 // Adds one second to current time
 void addOneSecond() {
     globalSecond += 1;
-    if (globalMinute > 59) {
-        globalMinute -= 60;
+    if (globalSecond > 59) {
+        globalSecond -= 60;
+        addOneMinute();
     }
 }
 
