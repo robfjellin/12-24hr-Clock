@@ -1,13 +1,29 @@
 #include "time_functions.h"
 
 // Global variables to hold users time
-int globalHour;
-int globalMilHour;
-int globalMinute;
-int globalSecond;
+int currentHour;
+int currentMilHour;
+int currentMinute;
+int currentSecond;
+
+int validateUserInput(int max, string prompt) {
+    int value;
+    while (true) {
+        cout << prompt << endl;
+        cin >> value;
+        if (cin.fail() || value < 0 || value > max) {
+            cout << "Invalid input. Please try again." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');2
+        } else {
+            break;
+        }
+    }
+    return value;
+}
 
 // Formats number as 2 digits if it isn't already
-string twoDigitString(unsigned int n) {
+string twoDigitString(const unsigned int n) {
     string twoDigit;
     if (n >= 0 && n <= 9) {
         twoDigit = "0" + to_string(n);
@@ -20,9 +36,7 @@ string twoDigitString(unsigned int n) {
 
 // Format to military time
 string formatTime24(int h, int m, int s) {
-    string militaryTime;
-
-    militaryTime = twoDigitString(h) + ":" + twoDigitString(m) + ":" + twoDigitString(s);
+    string militaryTime = twoDigitString(h) + ":" + twoDigitString(m) + ":" + twoDigitString(s);
     return militaryTime;
 }
 
@@ -50,46 +64,43 @@ void printTime() {
     cout << "**************************************" << endl;
     cout << "* 12-Hour Clock" << "   |   " << "24-Hour Clock  *" << endl;
     cout << "*------------------------------------*" << endl;
-    cout << "* " << formatTime12(globalHour, globalMinute, globalSecond) << "    |   " << formatTime24(globalHour, globalMinute, globalSecond) << "       *" << endl;
+    cout << "* " << formatTime12(currentHour, currentMinute, currentSecond) << "    |   " << formatTime24(currentHour, currentMinute, currentSecond) << "       *" << endl;
     cout << "**************************************" << endl;
 }
 
 // Takes initial time from user
 void timeInTake() {
-    cout << "Please enter an hour (0-23)." << endl;
-    cin >> globalHour;
-    cout << "Please enter a minute (0-59)." << endl;
-    cin >> globalMinute;
-    cout << "Please enter a second (0-59)." << endl;
-    cin >> globalSecond;
-    cout << "";
+
+    currentHour = validateUserInput(23, "Please enter an hour (0-23).");
+    currentMinute = validateUserInput(59, "Please enter a minute (0-59).");
+    currentSecond = validateUserInput(59, "Please enter a second (0-59).");
 
     printTime();
 }
 
 // Adds one hour to current time
 void addOneHour() {
-    globalHour += 1;
-    if (globalHour > 23) {
-        globalHour -= 24;
+    currentHour += 1;
+    if (currentHour > 23) {
+        currentHour -= 24;
     }
-    globalMilHour = globalHour;
+    currentMilHour = currentHour;
 }
 
 // Adds one minute to current time
 void addOneMinute() {
-    globalMinute += 1;
-    if (globalMinute > 59) {
-        globalMinute -= 60;
+    currentMinute += 1;
+    if (currentMinute > 59) {
+        currentMinute -= 60;
         addOneHour();
     }
 }
 
 // Adds one second to current time
 void addOneSecond() {
-    globalSecond += 1;
-    if (globalSecond > 59) {
-        globalSecond -= 60;
+    currentSecond += 1;
+    if (currentSecond > 59) {
+        currentSecond -= 60;
         addOneMinute();
     }
 }
